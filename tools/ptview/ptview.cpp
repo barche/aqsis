@@ -30,6 +30,9 @@
 
 #define GL_GLEXT_PROTOTYPES
 
+#include <GL/gl.h>
+#include <GL/glext.h>
+
 #include <QtCore/QSignalMapper>
 #include <QtGui/QApplication>
 #include <QtGui/QKeyEvent>
@@ -881,9 +884,10 @@ void PointView::drawPoints(const PointArrayModel& points, VisMode visMode,
             // Set distance attenuation for points, following the usual 1/z
             // law.
             GLfloat attenParams[3] = {0, 0, 1};
-            glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, attenParams);
-            glPointParameterf(GL_POINT_SIZE_MIN, 0);
-            glPointParameterf(GL_POINT_SIZE_MAX, 100);
+			// These don't work on MinGW, presumably because of old OpenGL?
+            //glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, attenParams);
+            //glPointParameterf(GL_POINT_SIZE_MIN, 0);
+            //glPointParameterf(GL_POINT_SIZE_MAX, 100);
             // Draw all points at once using vertex arrays.
             glEnableClientState(GL_VERTEX_ARRAY);
             glVertexPointer(3, GL_FLOAT, 3*sizeof(float),
