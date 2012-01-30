@@ -884,7 +884,7 @@ void PointView::drawPoints(const PointArrayModel& points, VisMode visMode,
             // Set distance attenuation for points, following the usual 1/z
             // law.
             GLfloat attenParams[3] = {0, 0, 1};
-			// These don't work on MinGW, presumably because of old OpenGL?
+			// If OpenGL version is less than 1.4, these don't work. TODO: add check using i.e. glew?
             //glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, attenParams);
             //glPointParameterf(GL_POINT_SIZE_MIN, 0);
             //glPointParameterf(GL_POINT_SIZE_MAX, 100);
